@@ -6,7 +6,7 @@ const typeDefs = gql`
         name: String
         email: String
         picture: String
-        favourite_pokemon_id: Int
+        favourite_pokemon_id: String
     }
     
     type PokemonSprite {
@@ -59,11 +59,11 @@ const typeDefs = gql`
     }
     
     type Mutation {
-        setFavouritePokemon(pokemonId: ID!): User
+        setFavouritePokemon(pokemonId: String!): User
     }
     
     type Subscription {
-        favouriteUpdated: User
+        userUpdated: User
     }
     
 `;

@@ -15,8 +15,6 @@ export const findOrCreateUser = async token => {
 
 const verifyAuthToken = async token => {
 
-    console.log(`OAUTH_GOOGLE_API_CLIENT_ID => ${process.env.OAUTH_GOOGLE_API_CLIENT_ID}`);
-
     try {
         const ticket = await clientOAuth2.verifyIdToken({
             idToken: token,

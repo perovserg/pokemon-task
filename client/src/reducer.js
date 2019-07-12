@@ -5,7 +5,7 @@ import {
     FETCH_POKEMONS_REQUEST,
     FETCH_POKEMONS_FAILURE,
     FETCH_POKEMONS_SUCCESS,
-    SET_CURRENT_POKEMON,
+    SET_FAVOURITE_POKEMON,
 } from './eventTypes';
 
 export default function reducer(state, { type, payload}) {
@@ -57,31 +57,11 @@ export default function reducer(state, { type, payload}) {
                 loadingError: null,
             };
 
-        case SET_CURRENT_POKEMON:
+        case SET_FAVOURITE_POKEMON:
             return {
                 ...state,
-                currentPokemon: payload,
+                currentUser: payload,
             };
-
-        /*
-        case 'SET_FAVOURITE_POKEMON':
-            const deletedPin = payload;
-            const filteredPins = state.pins.filter(pin => pin._id !== deletedPin._id);
-            if (state.currentPin) {
-                const isCurrentPin = deletedPin._id === state.currentPin._id;
-                if (isCurrentPin) {
-                    return {
-                        ...state,
-                        pins: filteredPins,
-                        currentPin: null,
-                    };
-                }
-            }
-            return {
-                ...state,
-                pins: filteredPins,
-            };
-        */
 
         default:
             return state;

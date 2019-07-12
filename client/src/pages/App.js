@@ -2,12 +2,13 @@ import React from "react";
 import withRoot from "../withRoot";
 
 import Header from '../components/Header';
-// import Map from '../components/Map';
+import PokemonGridList from '../components/PokemonGridList';
 
 const App = () => {
   return (
       <React.Fragment>
         <Header/>
+        <PokemonGridList/>
       </React.Fragment>
   );
 };

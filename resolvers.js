@@ -23,18 +23,18 @@ const resolvers = {
     },
     Mutation: {
         setFavouritePokemon: authenticated(async (root, args, ctx) => {
-            const userUpdated = await User.findOneAndUpdate(
+            await User.updateOne(
                 { _id: ctx.currentUser._id },
-                { $set: { favourite_pokemon_id: args.pokemonId } },
-                { new: true }
-            );
+                { favourite_pokemon_id: args.pokemonId }
+            ).exec();
+            const userUpdated = await User.findOne({ _id: ctx.currentUser._id }).exec();
             pubsub.publish(FAVOURITE_UPDATED, { userUpdated });
             return userUpdated;
 
         }),
     },
     Subscription: {
-        favouriteUpdated: {
+        userUpdated: {
             subscribe: () => pubsub.asyncIterator(FAVOURITE_UPDATED)
         },
     },
