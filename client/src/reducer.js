@@ -1,70 +1,70 @@
+import {
+    LOGIN_USER,
+    IS_LOGGED_IN,
+    SIGNOUT_USER,
+    FETCH_POKEMONS_REQUEST,
+    FETCH_POKEMONS_FAILURE,
+    FETCH_POKEMONS_SUCCESS,
+    SET_CURRENT_POKEMON,
+} from './eventTypes';
+
 export default function reducer(state, { type, payload}) {
 
     switch (type) {
 
-        case 'LOGIN_USER':
+        case LOGIN_USER:
             return {
                 ...state,
                 currentUser: payload,
             };
 
-        case 'IS_LOGGED_IN':
+        case IS_LOGGED_IN:
             return {
                 ...state,
                 isAuth: payload,
             };
 
-        case 'SIGNOUT_USER':
+        case SIGNOUT_USER:
             return {
                 ...state,
                 isAuth: false,
                 currentUser: null,
             };
 
-        case 'CREATE_DRAFT':
+        case FETCH_POKEMONS_REQUEST:
             return {
                 ...state,
-                draft: {
-                    latitude: 0,
-                    longitude: 0,
-                },
-                currentPin: null,
+                pokemons: [],
+                isLoading: true,
+                isLoaded: false,
+                loadingError: null,
             };
 
-        case 'UPDATE_DRAFT_LOCATION':
+        case FETCH_POKEMONS_FAILURE:
             return {
                 ...state,
-                draft: payload,
+                isLoading: false,
+                isLoaded: false,
+                loadingError: payload,
             };
 
-        case 'DELETE_DRAFT':
+        case FETCH_POKEMONS_SUCCESS:
             return {
                 ...state,
-                draft: null,
+                pokemons: payload,
+                isLoading: false,
+                isLoaded: true,
+                loadingError: null,
             };
 
-        case 'GET_PING':
+        case SET_CURRENT_POKEMON:
             return {
                 ...state,
-                pins: payload,
+                currentPokemon: payload,
             };
 
-        case 'CREATE_PIN':
-            const newPin = payload;
-            const prevPins = state.pins.filter(pin => pin._id !== newPin._id);
-            return {
-                ...state,
-                pins: [ ...prevPins, newPin ],
-            };
-
-        case 'SET_PIN':
-            return {
-                ...state,
-                currentPin: payload,
-                draft: null,
-            };
-
-        case 'DELETE_PIN':
+        /*
+        case 'SET_FAVOURITE_POKEMON':
             const deletedPin = payload;
             const filteredPins = state.pins.filter(pin => pin._id !== deletedPin._id);
             if (state.currentPin) {
@@ -81,16 +81,8 @@ export default function reducer(state, { type, payload}) {
                 ...state,
                 pins: filteredPins,
             };
+        */
 
-        case 'CREATE_COMMENT':
-            const updatedCurrentPin = payload;
-            // find updated and replace to new one
-            const updatedPins = state.pins.map(pin => pin._id === updatedCurrentPin._id ? updatedCurrentPin : pin);
-            return {
-                ...state,
-                pins: updatedPins,
-                currentPin: updatedCurrentPin,
-            };
         default:
             return state;
     }

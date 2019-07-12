@@ -3,9 +3,13 @@ import { createContext } from 'react';
 const appContext = createContext({
     currentUser: null,
     isAuth: false,
-    draft: null,
-    pins: [],
-    currentPin: null,
+    pokemons: [],
+    currentPokemon: null,
+    isLoading: false,
+    isLoaded: false,
+    loadingError: null,
+    pageOffset: null,
+    pageLimit: null,
 });
 
 export default appContext;

@@ -5,35 +5,45 @@ export const ME_QUERY = `
     name
     email
     picture
+    favourite_pokemon_id
   }
 }
 `;
 
-export const GET_PINS_QUERY = `
+export const GET_POKEMONS_QUERY = `
 {
-    getPins {
+    getPokemons {
         _id
-        createdAt
-        title
-        image
-        content
-        latitude
-        longitude
-        author {
-            _id
-            name
-            email
-            picture
+        pokeapi_id
+        name
+        sprites {
+            back_default
+            back_female
+            back_shiny
+            back_shiny_female
+            front_default
+            front_female
+            front_shiny
+            front_shiny_female
         }
-        comments {
-            text
-            createdAt
-            author {
-                _id
+        types {
+            slot
+            _type {
                 name
-                picture    
-            }    
+                url
+            }
         }
+        stats {
+            base_stat
+            effort
+            stat {
+                name
+                url
+            }
+        }
+        order
+        height
+        weight
     }     
 }
 `;

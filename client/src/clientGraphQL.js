@@ -11,7 +11,7 @@ export const useClient = () => {
     const [idToken, setIdToken] = useState('');
 
     useEffect(() => {
-        // получаем токен из апи гугла
+
         const idToken = window.gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
 
         setIdToken(idToken);

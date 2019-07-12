@@ -6,8 +6,11 @@ import Typography from "@material-ui/core/Typography";
 
 import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
 
+import config from '../../config';
+
 import Context from '../../context';
 
+import { SIGNOUT_USER } from '../../eventTypes';
 
 const Signout = ({ classes }) => {
 
@@ -15,12 +18,13 @@ const Signout = ({ classes }) => {
 
   const { dispatch } = useContext(Context);
 
-  const onSignout = () => dispatch({ type: 'SIGNOUT_USER' });
+  const onSignout = () => dispatch({ type: SIGNOUT_USER });
 
 
   return (
       <GoogleLogout
           onLogoutSuccess={onSignout}
+          clientId={config.OAUTH_GOOGLE_API_CLIENT_ID}
           render={({ onClick }) => (
               <span className={classes.root} onClick={onClick}>
                 <Typography

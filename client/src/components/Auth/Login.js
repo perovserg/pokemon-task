@@ -11,6 +11,7 @@ import { ME_QUERY } from "../../graphql/queries";
 
 import { BASE_URL } from "../../clientGraphQL";
 
+import { LOGIN_USER, IS_LOGGED_IN } from '../../eventTypes';
 
 const Login = ({ classes }) => {
 
@@ -20,10 +21,8 @@ const Login = ({ classes }) => {
 
     try {
 
-      // receive google token id for check it on our backend
       const idToken = googleUser.getAuthResponse().id_token;
 
-      // тут новый клиент потому что хук useClient нужно вызывать в начале компонента Login, а там еще нет idToken
       const clientGraphQL = new GraphQLClient(BASE_URL, {
         headers: { authorization: idToken }
       });
@@ -31,11 +30,11 @@ const Login = ({ classes }) => {
       const { me } = await clientGraphQL.request(ME_QUERY);
 
       dispatch({
-        type: 'LOGIN_USER', //todo: replace to constant
+        type: LOGIN_USER,
         payload: me,
       });
 
-      dispatch({ type: 'IS_LOGGED_IN', payload: googleUser.isSignedIn() });
+      dispatch({ type: IS_LOGGED_IN, payload: googleUser.isSignedIn() });
 
     } catch (error) {
       onFailure(error);
@@ -45,7 +44,7 @@ const Login = ({ classes }) => {
 
   const onFailure = error => {
     console.error('Error logging in', error);
-    dispatch({ type: 'IS_LOGGED_IN', payload: false });
+    dispatch({ type: IS_LOGGED_IN, payload: false });
   };
 
   return (
