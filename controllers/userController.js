@@ -14,22 +14,26 @@ export const findOrCreateUser = async token => {
 };
 
 const verifyAuthToken = async token => {
-  try {
-    const ticket = await clientOAuth2.verifyIdToken({
-        idToken: token,
-        audience: process.env.OAUTH_GOOGLE_API_CLIENT_ID,
-    });
 
-    return ticket.getPayload();
+    console.log(`OAUTH_GOOGLE_API_CLIENT_ID => ${process.env.OAUTH_GOOGLE_API_CLIENT_ID}`);
 
-  } catch (error) {
-      console.error('Error verifying auth token'. error);
-  }
+    try {
+        const ticket = await clientOAuth2.verifyIdToken({
+            idToken: token,
+            audience: process.env.OAUTH_GOOGLE_API_CLIENT_ID,
+        });
+
+        return ticket.getPayload();
+
+    } catch (error) {
+        console.error('Error verifying auth token'. error);
+    }
 };
 
 const checkIfUserExists = async email => await User.findOne({ email }).exec();
 
 const createNewUser = googleUser => {
-    const user = { name, email, picture } = googleUser;
+    const { name, email, picture } = googleUser;
+    const user = { name, email, picture };
     return new User(user).save();
 };

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MapIcon from "@material-ui/icons/Map";
+import PetsIcon from "@material-ui/icons/Pets";
 import Typography from "@material-ui/core/Typography";
 
 import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
@@ -25,7 +25,7 @@ const Header = ({ classes }) => {
         <Toolbar>
           {/*Title / Logo*/}
           <div className={classes.grow}>
-            <MapIcon className={classes.icon}/>
+            <PetsIcon className={classes.icon}/>
             <Typography
               className={mobileSize ? classes.mobile : ''}
               component="h1"
@@ -33,7 +33,7 @@ const Header = ({ classes }) => {
               color="inherit"
               noWrap
             >
-              GeoPins
+              Pokemons
             </Typography>
           </div>
 
