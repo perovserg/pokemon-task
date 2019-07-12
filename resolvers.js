@@ -24,7 +24,7 @@ const resolvers = {
     Mutation: {
         setFavouritePokemon: authenticated(async (root, args, ctx) => {
             const userUpdated = await User.findOneAndUpdate(
-                { _id: args.userId },
+                { _id: ctx.currentUser._id },
                 { $set: { favourite_pokemon_id: args.pokemonId } },
                 { new: true }
             );

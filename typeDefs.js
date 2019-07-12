@@ -59,7 +59,7 @@ const typeDefs = gql`
     }
     
     type Mutation {
-        setFavouritePokemon(userId: ID!, pokemonId: ID!): User
+        setFavouritePokemon(pokemonId: ID!): User
     }
     
     type Subscription {
