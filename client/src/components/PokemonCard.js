@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import red from '@material-ui/core/colors/red';
 
 import Context from "../context";
 
@@ -44,7 +46,7 @@ const PokemonCard = ({ classes, pokemon, handleSetFavouritePokemon }) => {
                         onClick={() => handleSetFavouritePokemon(pokemon)}
                     >
                         <FavoriteIcon
-                            style={state.currentUser.favourite_pokemon_id === pokemon._id ? {color: 'red'} : {}}
+                            style={state.currentUser.favourite_pokemon_id === pokemon._id ? {color: red[600]} : {}}
                         />
                     </IconButton>
                 }
@@ -56,7 +58,9 @@ const PokemonCard = ({ classes, pokemon, handleSetFavouritePokemon }) => {
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="div">
-                    {`order: ${order}, height: ${height}, weight: ${weight}`}
+                    <Paper className={classes.paper}>
+                        {`order: ${order}, height: ${height}, weight: ${weight}`}
+                    </Paper>
                     <Paper className={classes.paper}>
                         <span>types: </span>{typeChips}
                     </Paper>
@@ -78,10 +82,11 @@ const styles = {
         paddingTop: '56.25%', // 16:9
     },
     avatar: {
-        backgroundColor: 'blue',
+        backgroundColor: lightBlue[600],
     },
     paper: {
-        padding: 2
+        padding: 1,
+        margin: 2,
     },
 };
 
